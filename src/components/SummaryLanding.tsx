@@ -99,7 +99,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-[#808080] transition-all hover:bg-white/5 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-[#aaa] transition-all hover:bg-white/5 hover:text-white"
               >
                 {s.icon}
               </a>
@@ -108,13 +108,13 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               href={personal.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#808080] transition-all hover:border-white/25 hover:text-white"
+              className="ml-2 flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white"
             >
               Resume <ExternalLink size={11} />
             </a>
             <Link
               href="/recruiter"
-              className="flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#808080] transition-all hover:border-white/25 hover:text-white"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white"
             >
               Recruiter
             </Link>
@@ -147,17 +147,17 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                 <p className="mt-2 text-lg text-[#b3b3b3]">
                   {personal.headline}
                 </p>
-                <div className="mt-2 flex items-center gap-2 text-sm text-[#808080]">
+                <div className="mt-2 flex items-center gap-2 text-sm text-[#aaa]">
                   <MapPin size={14} />
                   <span>{personal.company} · Mumbai, India</span>
                 </div>
               </div>
             </div>
 
-            <p className="mt-6 text-base leading-relaxed text-[#999]">
+            <p className="mt-6 text-base leading-relaxed text-[#bbb]">
               {personal.about}
             </p>
-            <p className="mt-3 text-sm text-[#666]">
+            <p className="mt-3 text-sm text-[#bbb]">
               {personal.education}
             </p>
           </motion.div>
@@ -171,7 +171,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
                 Experience
               </h3>
-              <span className="text-xs text-[#666]">{experienceSnapshot.length} positions</span>
+              <span className="text-xs text-[#bbb]">{experienceSnapshot.length} positions</span>
             </div>
             <div className="flex flex-1 flex-col justify-center space-y-5">
               {experienceSnapshot.map((exp, i) => (
@@ -188,7 +188,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                         </span>
                       )}
                     </p>
-                    <p className="mt-0.5 text-sm text-[#808080]">
+                    <p className="mt-0.5 text-sm text-[#aaa]">
                       {exp.company} · {exp.period}
                     </p>
                   </div>
@@ -223,13 +223,13 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                   className="group cursor-pointer rounded-xl border border-white/[0.05] bg-white/[0.02] p-4 transition-all hover:border-white/15 hover:bg-white/[0.04]"
                 >
                   <div className="mb-1.5 flex items-center justify-between">
-                    <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-[#888]">
+                    <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-[#bbb]">
                       {proj.tag}
                     </span>
-                    <ArrowRight size={12} className="text-[#555] transition-colors group-hover:text-white" />
+                    <ArrowRight size={12} className="text-[#888] transition-colors group-hover:text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-white">{proj.title}</h4>
-                  <p className="mt-1 text-xs text-[#808080]">{proj.desc}</p>
+                  <p className="mt-1 text-xs text-[#aaa]">{proj.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -262,10 +262,10 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                   className="neon-card group flex flex-col items-center gap-3.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-6 transition-all hover:border-white/15 hover:bg-white/[0.04]"
                   style={{ "--neon-rgb": glow } as React.CSSProperties}
                 >
-                  <div className="neon-card-inner flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 text-[#808080] transition-all group-hover:text-white">
+                  <div className="neon-card-inner flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 text-[#aaa] transition-all group-hover:text-white">
                     {domainIcons[domain.id] ?? <Briefcase size={20} />}
                   </div>
-                  <span className="text-sm font-semibold text-[#888] transition-colors group-hover:text-white">
+                  <span className="text-sm font-semibold text-[#bbb] transition-colors group-hover:text-white">
                     {domain.title}
                   </span>
                 </motion.button>
@@ -276,12 +276,12 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
 
         {/* Footer */}
         <div className="mt-10 flex items-center justify-between border-t border-white/[0.04] pt-6">
-          <p className="text-xs text-[#444]">
+          <p className="text-xs text-[#666]">
             © {new Date().getFullYear()} {personal.name}
           </p>
           <a
             href="/recruiter"
-            className="text-xs text-[#555] transition-colors hover:text-white"
+            className="text-xs text-[#888] transition-colors hover:text-white"
           >
             Are you a recruiter? →
           </a>
