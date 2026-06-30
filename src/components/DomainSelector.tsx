@@ -26,27 +26,27 @@ interface DomainSelectorProps {
 
 const domainMeta: Record<string, { icon: ReactNode; glow: string }> = {
   experience: {
-    icon: <Briefcase size={32} strokeWidth={1.5} />,
+    icon: <Briefcase size={36} strokeWidth={2} />,
     glow: "139, 92, 246",
   },
   education: {
-    icon: <GraduationCap size={32} strokeWidth={1.5} />,
+    icon: <GraduationCap size={36} strokeWidth={2} />,
     glow: "59, 130, 246",
   },
   "data-science": {
-    icon: <BrainCircuit size={32} strokeWidth={1.5} />,
+    icon: <BrainCircuit size={36} strokeWidth={2} />,
     glow: "99, 102, 241",
   },
   sidequests: {
-    icon: <Rocket size={32} strokeWidth={1.5} />,
+    icon: <Rocket size={36} strokeWidth={2} />,
     glow: "236, 72, 153",
   },
   activities: {
-    icon: <Activity size={32} strokeWidth={1.5} />,
+    icon: <Activity size={36} strokeWidth={2} />,
     glow: "34, 197, 94",
   },
   network: {
-    icon: <Globe size={32} strokeWidth={1.5} />,
+    icon: <Globe size={36} strokeWidth={2} />,
     glow: "6, 182, 212",
   },
 };
@@ -116,7 +116,7 @@ export default function DomainSelector({ domains, personal, onSelect }: DomainSe
                   {meta.icon}
                 </motion.div>
 
-                <span className="text-xs text-[#666] transition-colors group-hover:text-white sm:text-sm">
+                <span className="text-xs font-semibold tracking-wide text-[#888] transition-colors group-hover:text-white sm:text-sm">
                   {domain.title}
                 </span>
               </motion.button>
