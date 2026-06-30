@@ -76,11 +76,14 @@ export default function DashboardLayout({
           ))}
         </div>
 
-        {/* Right side — profile button with dropdown */}
-        <div className="relative ml-auto" ref={dropdownRef}>
+        {/* Right side — name + profile button with dropdown */}
+        <div className="relative ml-auto flex items-center gap-3" ref={dropdownRef}>
+          <span className="hidden text-sm font-medium text-white/70 sm:inline">
+            {personal.name}
+          </span>
           <button
             onClick={() => setProfileOpen(!profileOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-600 text-xs font-bold text-white transition-transform hover:scale-105"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-sm font-bold text-white shadow-lg shadow-indigo-500/20 transition-transform hover:scale-110"
           >
             SP
           </button>
