@@ -50,6 +50,10 @@ export default function Home() {
       personal={portfolio.personal}
       domains={domainList}
       onExplore={() => setView("profiles")}
+      onSelectDomain={(id) => {
+        setCurrentDomain(id);
+        setView("domain");
+      }}
     />
   );
 }

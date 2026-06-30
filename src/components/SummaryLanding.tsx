@@ -2,11 +2,23 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { PersonalMetadata, DomainConfig } from "@/types";
-import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { SiSubstack } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
-import { ChevronRight } from "lucide-react";
+import {
+  Briefcase,
+  GraduationCap,
+  BrainCircuit,
+  Rocket,
+  Activity,
+  Globe,
+  ExternalLink,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
+import { type ReactNode } from "react";
 
 const ParticleField = dynamic(() => import("@/components/ParticleField"), {
   ssr: false,
@@ -16,64 +28,69 @@ interface SummaryLandingProps {
   personal: PersonalMetadata;
   domains: DomainConfig[];
   onExplore: () => void;
+  onSelectDomain: (id: string) => void;
 }
 
 const socialLinks = [
   { icon: <FaGithub size={18} />, href: "https://github.com/surpha", label: "GitHub" },
   { icon: <FaLinkedinIn size={18} />, href: "https://www.linkedin.com/in/suraj-phalod-26a042204/", label: "LinkedIn" },
   { icon: <FaXTwitter size={18} />, href: "https://x.com/surpharosh", label: "X" },
+  { icon: <FaInstagram size={18} />, href: "https://www.instagram.com/surpharosh", label: "Instagram" },
   { icon: <SiSubstack size={16} />, href: "https://substack.com", label: "Substack" },
   { icon: <HiOutlineMail size={18} />, href: "mailto:hello@surajphalod.com", label: "Email" },
 ];
 
 const experienceSnapshot = [
-  { role: "Data Science Manager", company: "Procter & Gamble", period: "2023 — Present" },
-  { role: "Data Scientist", company: "Procter & Gamble", period: "2021 — 2023" },
-  { role: "Intern", company: "Procter & Gamble", period: "2020 — 2021" },
+  { role: "Data Science Manager", company: "Procter & Gamble", period: "2023 — Present", current: true },
+  { role: "Data Scientist", company: "Procter & Gamble", period: "2021 — 2023", current: false },
+  { role: "Intern", company: "Procter & Gamble", period: "2020 — 2021", current: false },
 ];
 
-export default function SummaryLanding({ personal, domains, onExplore }: SummaryLandingProps) {
+const featuredProjects = [
+  { title: "Sanyam App", desc: "NFC-based distraction blocker for Android", tag: "Hardware" },
+  { title: "Shiva Kingdom Farm Stay", desc: "Heritage Airbnb in Udaipur with AI guest agents", tag: "Hospitality" },
+  { title: "SOCaiL Media", desc: "AI-assisted digital marketing framework", tag: "Agency" },
+];
+
+const domainIcons: Record<string, ReactNode> = {
+  experience: <Briefcase size={20} strokeWidth={2} />,
+  education: <GraduationCap size={20} strokeWidth={2} />,
+  "data-science": <BrainCircuit size={20} strokeWidth={2} />,
+  sidequests: <Rocket size={20} strokeWidth={2} />,
+  activities: <Activity size={20} strokeWidth={2} />,
+  network: <Globe size={20} strokeWidth={2} />,
+};
+
+const domainGlow: Record<string, string> = {
+  experience: "139, 92, 246",
+  education: "59, 130, 246",
+  "data-science": "99, 102, 241",
+  sidequests: "236, 72, 153",
+  activities: "34, 197, 94",
+  network: "6, 182, 212",
+};
+
+const anim = (delay: number) => ({
+  initial: { opacity: 0, y: 20 } as const,
+  animate: { opacity: 1, y: 0 } as const,
+  transition: { duration: 0.5, delay },
+});
+
+export default function SummaryLanding({ personal, domains, onExplore, onSelectDomain }: SummaryLandingProps) {
   return (
     <div className="relative min-h-screen bg-[#0a0a0a]">
       <ParticleField />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-20 sm:px-8 sm:py-28">
-        {/* Hero section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col items-start"
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+        {/* Top bar — name + socials */}
+        <motion.nav
+          {...anim(0)}
+          className="mb-10 flex items-center justify-between"
         >
-          <p className="text-sm tracking-widest text-[#6366f1] uppercase">
-            Welcome
-          </p>
-
-          <h1 className="mt-4 text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
             {personal.name}
           </h1>
-
-          <p className="mt-3 text-xl text-[#b3b3b3] sm:text-2xl">
-            {personal.headline} at{" "}
-            <span className="text-white">{personal.company}</span>
-          </p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            className="mt-6 max-w-2xl text-base leading-relaxed text-[#888]"
-          >
-            {personal.about}
-          </motion.p>
-
-          {/* Social links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="mt-8 flex items-center gap-3"
-          >
+          <div className="flex items-center gap-2.5">
             {socialLinks.map((s) => (
               <a
                 key={s.label}
@@ -81,7 +98,7 @@ export default function SummaryLanding({ personal, domains, onExplore }: Summary
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[#808080] transition-all hover:border-white/30 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-[#808080] transition-all hover:bg-white/5 hover:text-white"
               >
                 {s.icon}
               </a>
@@ -90,102 +107,175 @@ export default function SummaryLanding({ personal, domains, onExplore }: Summary
               href={personal.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 rounded-full border border-white/10 px-4 py-2 text-xs font-medium tracking-wider text-[#808080] transition-all hover:border-white/30 hover:text-white"
+              className="ml-2 flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#808080] transition-all hover:border-white/25 hover:text-white"
             >
-              RESUME
+              Resume <ExternalLink size={11} />
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </motion.nav>
 
-        {/* Experience snapshot */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-          className="mt-20"
-        >
-          <h2 className="mb-6 text-xs font-medium tracking-widest text-[#666] uppercase">
-            Experience
-          </h2>
-          <div className="space-y-0 border-l border-white/10 pl-6">
-            {experienceSnapshot.map((exp, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.4 }}
-                className="relative py-4"
-              >
-                {/* Dot */}
-                <div className="absolute -left-[29px] top-[22px] h-2.5 w-2.5 rounded-full border border-white/20 bg-[#0a0a0a]">
-                  <div className="absolute inset-[3px] rounded-full bg-[#6366f1]" />
+        {/* ===== MAIN CONTENT AREA (top ~75%) ===== */}
+        <div className="grid gap-5 lg:grid-cols-3">
+          {/* LEFT: About me + photo — spans 2 cols */}
+          <motion.div
+            {...anim(0.1)}
+            className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-sm lg:col-span-2"
+          >
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+              {/* Photo */}
+              <div className="relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#6366f1]/20 to-[#8b5cf6]/20 sm:h-32 sm:w-32">
+                {/* Replace with <Image src="/photo.jpg" ... /> when you have a photo */}
+                <div className="flex h-full w-full items-center justify-center text-3xl font-bold text-[#6366f1]">
+                  SP
                 </div>
+              </div>
 
-                <p className="text-sm font-semibold text-white">
-                  {exp.role}
+              <div className="min-w-0 flex-1">
+                <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                  {personal.name}
+                </h2>
+                <p className="mt-2 text-lg text-[#b3b3b3]">
+                  {personal.headline}
                 </p>
-                <p className="mt-0.5 text-sm text-[#808080]">
-                  {exp.company} · {exp.period}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <div className="mt-2 flex items-center gap-2 text-sm text-[#808080]">
+                  <MapPin size={14} />
+                  <span>{personal.company} · Mumbai, India</span>
+                </div>
+              </div>
+            </div>
 
-        {/* Domains preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.7 }}
-          className="mt-20"
-        >
-          <h2 className="mb-6 text-xs font-medium tracking-widest text-[#666] uppercase">
-            Explore
-          </h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {domains.map((domain, i) => (
-              <motion.button
-                key={domain.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + i * 0.05, duration: 0.3 }}
-                onClick={onExplore}
-                className="group flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-left transition-all hover:border-white/15 hover:bg-white/[0.04]"
+            <p className="mt-6 text-base leading-relaxed text-[#999]">
+              {personal.about}
+            </p>
+            <p className="mt-3 text-sm text-[#666]">
+              {personal.education}
+            </p>
+          </motion.div>
+
+          {/* RIGHT: Experience */}
+          <motion.div
+            {...anim(0.2)}
+            className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-sm"
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+                Experience
+              </h3>
+              <span className="text-xs text-[#666]">{experienceSnapshot.length} positions</span>
+            </div>
+            <div className="flex flex-1 flex-col justify-center space-y-5">
+              {experienceSnapshot.map((exp, i) => (
+                <div key={i} className="flex items-start gap-3.5">
+                  <div className="mt-1 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.04]">
+                    <Briefcase size={16} className="text-[#6366f1]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-base font-medium text-white">
+                      {exp.role}
+                      {exp.current && (
+                        <span className="ml-2 inline-block rounded-full bg-[#6366f1]/15 px-2.5 py-0.5 text-[11px] font-medium text-[#6366f1]">
+                          Current
+                        </span>
+                      )}
+                    </p>
+                    <p className="mt-0.5 text-sm text-[#808080]">
+                      {exp.company} · {exp.period}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Featured Projects — full width */}
+          <motion.div
+            {...anim(0.3)}
+            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-sm lg:col-span-3"
+          >
+            <div className="mb-5 flex items-center justify-between">
+              <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+                Featured Projects
+              </h3>
+              <button
+                onClick={() => onSelectDomain("sidequests")}
+                className="flex items-center gap-1 text-xs text-[#6366f1] transition-colors hover:text-white"
               >
-                <span className="text-sm text-[#999] transition-colors group-hover:text-white">
-                  {domain.title}
-                </span>
-                <ChevronRight size={14} className="text-[#555] transition-colors group-hover:text-white" />
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+                View All <ArrowRight size={12} />
+              </button>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {featuredProjects.map((proj, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 + i * 0.08, duration: 0.4 }}
+                  className="group cursor-pointer rounded-xl border border-white/[0.05] bg-white/[0.02] p-5 transition-all hover:border-white/15 hover:bg-white/[0.04]"
+                >
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[11px] font-medium text-[#888]">
+                      {proj.tag}
+                    </span>
+                    <ArrowRight size={14} className="text-[#555] transition-colors group-hover:text-white" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white">{proj.title}</h4>
+                  <p className="mt-1.5 text-sm text-[#808080]">{proj.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
-          className="mt-16 flex items-center gap-4"
-        >
-          <button
-            onClick={onExplore}
-            className="rounded-full bg-[#6366f1] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#5558e6]"
-          >
-            Explore All Profiles
-          </button>
-          <a
-            href="/recruiter"
-            className="text-sm text-[#666] transition-colors hover:text-white"
-          >
-            Are you a recruiter? →
-          </a>
+        {/* ===== BOTTOM SECTION (~25%) — Domain cards ===== */}
+        <motion.div {...anim(0.5)} className="mt-8">
+          <div className="mb-5 flex items-center justify-between">
+            <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+              Explore
+            </h3>
+            <button
+              onClick={onExplore}
+              className="flex items-center gap-1 text-xs text-[#6366f1] transition-colors hover:text-white"
+            >
+              All Profiles <ArrowRight size={12} />
+            </button>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {domains.map((domain, i) => {
+              const glow = domainGlow[domain.id] ?? "99, 102, 241";
+              return (
+                <motion.button
+                  key={domain.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.55 + i * 0.04, duration: 0.3 }}
+                  onClick={() => onSelectDomain(domain.id)}
+                  className="neon-card group flex flex-col items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-5 transition-all hover:border-white/15 hover:bg-white/[0.04]"
+                  style={{ "--neon-rgb": glow } as React.CSSProperties}
+                >
+                  <div className="neon-card-inner flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-[#808080] transition-all group-hover:text-white">
+                    {domainIcons[domain.id] ?? <Briefcase size={20} />}
+                  </div>
+                  <span className="text-xs font-semibold text-[#888] transition-colors group-hover:text-white">
+                    {domain.title}
+                  </span>
+                </motion.button>
+              );
+            })}
+          </div>
         </motion.div>
 
         {/* Footer */}
-        <p className="mt-24 text-xs text-[#444]">
-          © {new Date().getFullYear()} {personal.name}
-        </p>
+        <div className="mt-10 flex items-center justify-between border-t border-white/[0.04] pt-6">
+          <p className="text-xs text-[#444]">
+            © {new Date().getFullYear()} {personal.name}
+          </p>
+          <a
+            href="/recruiter"
+            className="text-xs text-[#555] transition-colors hover:text-white"
+          >
+            Are you a recruiter? →
+          </a>
+        </div>
       </div>
     </div>
   );
