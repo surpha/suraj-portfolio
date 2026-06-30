@@ -3,6 +3,7 @@ export interface PersonalMetadata {
   headline: string;
   company: string;
   education: string;
+  about: string;
   resumeUrl: string;
 }
 

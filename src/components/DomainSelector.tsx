@@ -46,6 +46,14 @@ export default function DomainSelector({ domains, personal, onSelect }: DomainSe
           <p className="mt-1 max-w-md text-sm text-[#808080]">
             {personal.education}
           </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mt-6 max-w-2xl text-sm leading-relaxed text-[#999]"
+          >
+            {personal.about}
+          </motion.p>
         </motion.div>
 
         {/* Section label */}
