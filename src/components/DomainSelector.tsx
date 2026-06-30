@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { DomainConfig, PersonalMetadata } from "@/types";
+import {
+  Briefcase,
+  GraduationCap,
+  BrainCircuit,
+  Rocket,
+  Activity,
+  Globe,
+} from "lucide-react";
+import { type ReactNode } from "react";
 
 interface DomainSelectorProps {
   domains: DomainConfig[];
@@ -10,13 +19,13 @@ interface DomainSelectorProps {
   onSelect: (domainId: string) => void;
 }
 
-const profileIcons: Record<string, string> = {
-  experience: "💼",
-  education: "🎓",
-  "data-science": "🧠",
-  sidequests: "🚀",
-  activities: "🏃",
-  network: "🌐",
+const profileIcons: Record<string, ReactNode> = {
+  experience: <Briefcase size={36} strokeWidth={1.5} />,
+  education: <GraduationCap size={36} strokeWidth={1.5} />,
+  "data-science": <BrainCircuit size={36} strokeWidth={1.5} />,
+  sidequests: <Rocket size={36} strokeWidth={1.5} />,
+  activities: <Activity size={36} strokeWidth={1.5} />,
+  network: <Globe size={36} strokeWidth={1.5} />,
 };
 
 export default function DomainSelector({ domains, personal, onSelect }: DomainSelectorProps) {
@@ -61,32 +70,25 @@ export default function DomainSelector({ domains, personal, onSelect }: DomainSe
           Select a profile to explore
         </p>
 
-        <div className="flex flex-wrap items-start justify-center gap-6 sm:gap-8">
+        <div className="flex flex-wrap items-start justify-center gap-5 sm:gap-6">
           {domains.map((domain, index) => (
             <motion.button
               key={domain.id}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
               onClick={() => onSelect(domain.id)}
               className="group flex flex-col items-center gap-3"
             >
-              {/* Profile avatar */}
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`profile-avatar-${index % 6} flex h-[120px] w-[120px] items-center justify-center rounded-md sm:h-[140px] sm:w-[140px] lg:h-[160px] lg:w-[160px]`}
-                style={{
-                  border: "3px solid transparent",
-                }}
+                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.5)" }}
+                whileTap={{ scale: 0.97 }}
+                className="flex h-[100px] w-[100px] items-center justify-center rounded-xl border border-[#333] bg-transparent text-[#808080] transition-colors group-hover:text-white sm:h-[120px] sm:w-[120px]"
               >
-                <span className="text-5xl sm:text-6xl">
-                  {profileIcons[domain.id] ?? "📂"}
-                </span>
+                {profileIcons[domain.id] ?? <Briefcase size={36} strokeWidth={1.5} />}
               </motion.div>
 
-              {/* Profile name */}
-              <span className="text-sm text-[#808080] transition-colors group-hover:text-white sm:text-base">
+              <span className="text-xs text-[#808080] transition-colors group-hover:text-white sm:text-sm">
                 {domain.title}
               </span>
             </motion.button>
