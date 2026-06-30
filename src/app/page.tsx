@@ -75,21 +75,84 @@ function SplashScreen({ onFinish }: { onFinish: () => void }) {
   );
 }
 
+function IntroScreen({ onContinue }: { onContinue: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6 }}
+      className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-6 text-center"
+    >
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+        className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+      >
+        {portfolio.personal.name}
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="mt-4 max-w-xl text-lg text-[#b3b3b3] sm:text-xl"
+      >
+        {portfolio.personal.headline} at {portfolio.personal.company}
+      </motion.p>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
+        className="mt-2 max-w-lg text-sm text-[#808080] sm:text-base"
+      >
+        {portfolio.personal.education}
+      </motion.p>
+
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+        onClick={onContinue}
+        className="mt-12 rounded bg-[#e50914] px-8 py-3 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#f40612]"
+      >
+        EXPLORE
+      </motion.button>
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
   return (
     <>
       <AnimatePresence>
-        {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+        {showSplash && (
+          <SplashScreen
+            onFinish={() => {
+              setShowSplash(false);
+              setShowIntro(true);
+            }}
+          />
+        )}
       </AnimatePresence>
 
-      {!showSplash && currentDomain === null && (
+      <AnimatePresence>
+        {!showSplash && showIntro && (
+          <IntroScreen onContinue={() => setShowIntro(false)} />
+        )}
+      </AnimatePresence>
+
+      {!showSplash && !showIntro && currentDomain === null && (
         <DomainSelector domains={domainList} onSelect={setCurrentDomain} />
       )}
 
-      {!showSplash && currentDomain !== null && (
+      {!showSplash && !showIntro && currentDomain !== null && (
         <DashboardLayout
           domain={portfolio.domains[currentDomain]}
           personal={portfolio.personal}

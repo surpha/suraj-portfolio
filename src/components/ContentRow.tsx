@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaYoutube, FaSpotify, FaStrava, FaMedium } from "react-icons/fa6";
-import { SiSubstack, SiHevy, SiLetterboxd } from "react-icons/si";
+import { SiSubstack, SiHevy, SiLetterboxd, SiKaggle } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoRestaurant } from "react-icons/io5";
 import { ContentRow as ContentRowType, MediaItem } from "@/types";
@@ -24,6 +24,7 @@ const brandColorMap: Record<string, string> = {
   Hevy: "#2563eb",
   Letterboxd: "#00d735",
   Beli: "#ff6b35",
+  Kaggle: "#20beff",
 };
 
 const iconMap: Record<string, IconType> = {
@@ -40,6 +41,7 @@ const iconMap: Record<string, IconType> = {
   Hevy: SiHevy,
   Letterboxd: SiLetterboxd,
   Beli: IoRestaurant,
+  Kaggle: SiKaggle,
 };
 
 interface ContentRowProps {

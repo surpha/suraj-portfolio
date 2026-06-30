@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { DomainConfig } from "@/types";
 
 interface DomainSelectorProps {
@@ -9,6 +10,8 @@ interface DomainSelectorProps {
 }
 
 const profileIcons: Record<string, string> = {
+  experience: "💼",
+  education: "🎓",
   "data-science": "🧠",
   sidequests: "🚀",
   activities: "🏃",
@@ -16,6 +19,8 @@ const profileIcons: Record<string, string> = {
 };
 
 export default function DomainSelector({ domains, onSelect }: DomainSelectorProps) {
+  const router = useRouter();
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-4">
       <motion.div
@@ -45,7 +50,7 @@ export default function DomainSelector({ domains, onSelect }: DomainSelectorProp
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`profile-avatar-${index} flex h-[120px] w-[120px] items-center justify-center rounded-md sm:h-[140px] sm:w-[140px] lg:h-[160px] lg:w-[160px]`}
+                className={`profile-avatar-${index % 6} flex h-[120px] w-[120px] items-center justify-center rounded-md sm:h-[140px] sm:w-[140px] lg:h-[160px] lg:w-[160px]`}
                 style={{
                   border: "3px solid transparent",
                 }}
@@ -63,14 +68,15 @@ export default function DomainSelector({ domains, onSelect }: DomainSelectorProp
           ))}
         </div>
 
-        {/* Manage Profiles button (decorative, like Netflix) */}
+        {/* Recruiter CTA */}
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
+          onClick={() => router.push("/recruiter")}
           className="mt-16 border border-[#808080] px-6 py-2 text-sm font-medium tracking-[0.2em] text-[#808080] transition-colors hover:border-white hover:text-white"
         >
-          MANAGE PROFILES
+          ARE YOU A RECRUITER?
         </motion.button>
       </motion.div>
     </div>

@@ -7,6 +7,89 @@
     "resumeUrl": "/docs/Suraj_Phalod_Resume.pdf"
   },
   "domains": {
+    "experience": {
+      "id": "experience",
+      "title": "Experience",
+      "tagline": "Career trajectory from BITS Pilani to P&G Data Science leadership.",
+      "hero": {
+        "title": "Product Supply Data Science Manager",
+        "description": "Leading ML-driven supply chain optimization at Procter & Gamble, Mumbai.",
+        "badge": "Current Role",
+        "actionLabel": "View Resume"
+      },
+      "rows": [
+        {
+          "rowTitle": "Timeline",
+          "items": [
+            {
+              "id": "exp-1",
+              "title": "Data Science Manager — P&G",
+              "description": "Leading product supply data science initiatives across India & AMEA.",
+              "tag": "2023 → Present"
+            },
+            {
+              "id": "exp-2",
+              "title": "Data Scientist — P&G",
+              "description": "Built predictive models for supply chain disruption mitigation.",
+              "tag": "2021 → 2023"
+            },
+            {
+              "id": "exp-3",
+              "title": "Intern — P&G",
+              "description": "Developed automation pipelines for logistics operations.",
+              "tag": "2020 → 2021"
+            }
+          ]
+        }
+      ]
+    },
+    "education": {
+      "id": "education",
+      "title": "Education & Extra",
+      "tagline": "Academic foundation and extracurricular pursuits.",
+      "hero": {
+        "title": "BITS Pilani — Dual Degree",
+        "description": "B.E. Computer Science & M.Sc. Economics & Finance. A rigorous multi-disciplinary foundation.",
+        "badge": "Alma Mater",
+        "actionLabel": "Details"
+      },
+      "rows": [
+        {
+          "rowTitle": "Education",
+          "items": [
+            {
+              "id": "edu-1",
+              "title": "BITS Pilani — B.E. Computer Science",
+              "description": "Core CS fundamentals, algorithms, systems design.",
+              "tag": "2016 → 2021"
+            },
+            {
+              "id": "edu-2",
+              "title": "BITS Pilani — M.Sc. Economics & Finance",
+              "description": "Dual degree in quantitative economics and financial modeling.",
+              "tag": "2016 → 2021"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Extracurriculars",
+          "items": [
+            {
+              "id": "edu-3",
+              "title": "Shaam-e-Sukoon",
+              "description": "Organized and performed in acoustic vocal music sessions.",
+              "tag": "Music"
+            },
+            {
+              "id": "edu-4",
+              "title": "Running & Marathons",
+              "description": "Long-distance running events and campus athletic meets.",
+              "tag": "Athletics"
+            }
+          ]
+        }
+      ]
+    },
     "data-science": {
       "id": "data-science",
       "title": "Data Science & AI",
@@ -124,6 +207,13 @@
               "description": "",
               "tag": "Code",
               "link": "https://github.com/surpha"
+            },
+            {
+              "id": "net-14",
+              "title": "Kaggle",
+              "description": "",
+              "tag": "Data Science",
+              "link": "https://kaggle.com"
             }
           ]
         },
