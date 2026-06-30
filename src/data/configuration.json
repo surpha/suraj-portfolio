@@ -54,35 +54,50 @@
         "badge": "Alma Mater",
         "actionLabel": "Details"
       },
-      "rows": [
+      "educationEntries": [
         {
-          "rowTitle": "Education",
-          "items": [
-            {
-              "id": "edu-1",
-              "title": "BITS Pilani — B.E. Computer Science",
-              "description": "Core CS fundamentals, algorithms, systems design.",
-              "tag": "2016 → 2021"
-            },
-            {
-              "id": "edu-2",
-              "title": "BITS Pilani — M.Sc. Economics & Finance",
-              "description": "Dual degree in quantitative economics and financial modeling.",
-              "tag": "2016 → 2021"
-            }
-          ]
+          "id": "edu-1",
+          "school": "Birla Institute of Technology & Science, Pilani",
+          "degree": "B.E. Computer Science Engineering",
+          "duration": "2020 — 2025",
+          "coursework": ["Machine Learning", "Deep Learning", "Data Mining", "Object Oriented Programming", "Foundations of Data Science", "Database Systems", "Data Structures & Algorithms"],
+          "logo": "/logos/bits.png"
         },
+        {
+          "id": "edu-2",
+          "school": "Birla Institute of Technology & Science, Pilani",
+          "degree": "M.Sc. Economics & Finance",
+          "duration": "2020 — 2025",
+          "coursework": ["Econometrics", "Financial Management", "Game Theory", "Derivatives & Risk Management", "Business Analysis & Valuation"],
+          "logo": "/logos/bits.png"
+        },
+        {
+          "id": "edu-3",
+          "school": "PACE Junior Science College, Mumbai",
+          "degree": "HSC & JEE Coaching",
+          "duration": "2018 — 2020",
+          "logo": "/logos/pace.png"
+        },
+        {
+          "id": "edu-4",
+          "school": "Lokhandwala Foundation School, Mumbai",
+          "degree": "ICSE",
+          "duration": "2008 — 2018",
+          "logo": "/logos/lfs.png"
+        }
+      ],
+      "rows": [
         {
           "rowTitle": "Extracurriculars",
           "items": [
             {
-              "id": "edu-3",
+              "id": "edu-5",
               "title": "Shaam-e-Sukoon",
               "description": "Organized and performed in acoustic vocal music sessions.",
               "tag": "Music"
             },
             {
-              "id": "edu-4",
+              "id": "edu-6",
               "title": "Running & Marathons",
               "description": "Long-distance running events and campus athletic meets.",
               "tag": "Athletics"

@@ -15,6 +15,15 @@ export interface MediaItem {
   link?: string;
 }
 
+export interface EducationEntry {
+  id: string;
+  school: string;
+  degree: string;
+  duration: string;
+  coursework?: string[];
+  logo?: string;
+}
+
 export interface ContentRow {
   rowTitle: string;
   items: MediaItem[];
@@ -33,6 +42,7 @@ export interface DomainConfig {
   tagline: string;
   hero: HeroConfig;
   rows: ContentRow[];
+  educationEntries?: EducationEntry[];
 }
 
 export interface FullPortfolioConfig {

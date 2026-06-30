@@ -6,6 +6,7 @@ import HeroBanner from "./HeroBanner";
 import ContentRow from "./ContentRow";
 import InfoModal from "./InfoModal";
 import NetworkHero from "./NetworkHero";
+import EducationTimeline from "./EducationTimeline";
 
 interface DashboardLayoutProps {
   domain: DomainConfig;
@@ -121,23 +122,45 @@ export default function DashboardLayout({
         <NetworkHero
           items={domain.rows.flatMap((r) => r.items)}
         />
-      ) : (
+      ) : domain.id === "education" ? null : (
         <HeroBanner
           hero={domain.hero}
           domainTitle={domain.title}
         />
       )}
 
-      {/* Content rows */}
-      <div className="relative z-10 -mt-16 pb-16">
-        {domain.rows.map((row) => (
-          <ContentRow
-            key={row.rowTitle}
-            row={row}
-            onItemClick={setSelectedItem}
-          />
-        ))}
-      </div>
+      {/* Education timeline layout */}
+      {domain.id === "education" && domain.educationEntries ? (
+        <div className="pt-24">
+          <div className="mx-auto max-w-4xl px-6 sm:px-8">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">{domain.hero.title}</h2>
+            <p className="mt-2 text-base text-[#808080]">{domain.hero.description}</p>
+          </div>
+          <EducationTimeline entries={domain.educationEntries} />
+
+          {/* Extracurriculars rows below */}
+          <div className="pb-16">
+            {domain.rows.map((row) => (
+              <ContentRow
+                key={row.rowTitle}
+                row={row}
+                onItemClick={setSelectedItem}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        /* Standard content rows */
+        <div className="relative z-10 -mt-16 pb-16">
+          {domain.rows.map((row) => (
+            <ContentRow
+              key={row.rowTitle}
+              row={row}
+              onItemClick={setSelectedItem}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Detail modal */}
       <InfoModal item={selectedItem} onClose={() => setSelectedItem(null)} />
