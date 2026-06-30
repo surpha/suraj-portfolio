@@ -133,8 +133,7 @@ export default function DashboardLayout({
       {domain.id === "education" && domain.educationEntries ? (
         <div className="pt-24">
           <div className="mx-auto max-w-4xl px-6 sm:px-8">
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">{domain.hero.title}</h2>
-            <p className="mt-2 text-base text-[#808080]">{domain.hero.description}</p>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Education</h2>
           </div>
           <EducationTimeline entries={domain.educationEntries} />
 

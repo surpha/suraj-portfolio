@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import config from "@/data/configuration.json";
 import { FullPortfolioConfig, DomainConfig } from "@/types";
+import SummaryLanding from "@/components/SummaryLanding";
 import DomainSelector from "@/components/DomainSelector";
 import DashboardLayout from "@/components/DashboardLayout";
 
@@ -11,25 +11,49 @@ const portfolio = config as FullPortfolioConfig;
 const domainList: DomainConfig[] = Object.values(portfolio.domains);
 
 export default function Home() {
+  const [view, setView] = useState<"landing" | "profiles" | "domain">("landing");
   const [currentDomain, setCurrentDomain] = useState<string | null>(null);
 
-  if (currentDomain !== null) {
+  if (view === "domain" && currentDomain !== null) {
     return (
       <DashboardLayout
         domain={portfolio.domains[currentDomain]}
         personal={portfolio.personal}
         allDomains={domainList}
-        onSwitchDomain={setCurrentDomain}
-        onReset={() => setCurrentDomain(null)}
+        onSwitchDomain={(id) => {
+          setCurrentDomain(id);
+          setView("domain");
+        }}
+        onReset={() => {
+          setCurrentDomain(null);
+          setView("landing");
+        }}
+      />
+    );
+  }
+
+  if (view === "profiles") {
+    return (
+      <DomainSelector
+        domains={domainList}
+        personal={portfolio.personal}
+        onSelect={(id) => {
+          setCurrentDomain(id);
+          setView("domain");
+        }}
       />
     );
   }
 
   return (
-    <DomainSelector
-      domains={domainList}
+    <SummaryLanding
       personal={portfolio.personal}
-      onSelect={setCurrentDomain}
+      domains={domainList}
+      onExplore={() => setView("profiles")}
+      onSelectDomain={(id) => {
+        setCurrentDomain(id);
+        setView("domain");
+      }}
     />
   );
 }
