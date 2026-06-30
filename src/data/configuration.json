@@ -190,13 +190,6 @@
           "rowTitle": "Music & Media",
           "items": [
             {
-              "id": "net-7",
-              "title": "YouTube",
-              "description": "",
-              "tag": "Video",
-              "link": "https://youtube.com"
-            },
-            {
               "id": "net-8",
               "title": "Spotify",
               "description": "",
@@ -208,7 +201,7 @@
               "title": "Letterboxd",
               "description": "",
               "tag": "Film",
-              "link": "https://letterboxd.com"
+              "link": "https://letterboxd.com/surpharosh/"
             }
           ]
         },
@@ -220,7 +213,7 @@
               "title": "Beli",
               "description": "",
               "tag": "Food",
-              "link": "https://beli.com"
+              "link": "https://beliapp.co/app/surpharosh"
             }
           ]
         },
