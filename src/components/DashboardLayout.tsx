@@ -6,6 +6,7 @@ import { DomainConfig, PersonalMetadata, MediaItem } from "@/types";
 import HeroBanner from "./HeroBanner";
 import ContentRow from "./ContentRow";
 import InfoModal from "./InfoModal";
+import NetworkHero from "./NetworkHero";
 
 interface DashboardLayoutProps {
   domain: DomainConfig;
@@ -79,12 +80,19 @@ export default function DashboardLayout({
         </div>
       </nav>
 
-      {/* Hero Billboard */}
-      <HeroBanner
-        hero={domain.hero}
-        domainTitle={domain.title}
-        resumeUrl={personal.resumeUrl}
-      />
+      {/* Hero Billboard — auto-cycling for Network, standard for others */}
+      {domain.id === "network" && domain.rows[0] ? (
+        <NetworkHero
+          items={domain.rows[0].items}
+          resumeUrl={personal.resumeUrl}
+        />
+      ) : (
+        <HeroBanner
+          hero={domain.hero}
+          domainTitle={domain.title}
+          resumeUrl={personal.resumeUrl}
+        />
+      )}
 
       {/* Content rows — Netflix-style */}
       <div className="relative z-10 -mt-16 pb-16">

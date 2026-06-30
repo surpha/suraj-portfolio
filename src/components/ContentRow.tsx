@@ -2,34 +2,37 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Code2,
-  Briefcase,
-  BookOpenText,
-  AtSign,
-  Camera,
-  Newspaper,
-  Video,
-  Music,
-  Activity,
-  Mail,
-  type LucideIcon,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaYoutube, FaSpotify, FaStrava, FaMedium } from "react-icons/fa6";
+import { SiSubstack } from "react-icons/si";
+import { HiOutlineMail } from "react-icons/hi";
 import { ContentRow as ContentRowType, MediaItem } from "@/types";
+import { type IconType } from "react-icons";
 
-const iconMap: Record<string, LucideIcon> = {
-  GitHub: Code2,
-  LinkedIn: Briefcase,
-  "Twitter / X": AtSign,
-  Instagram: Camera,
-  YouTube: Video,
-  Spotify: Music,
-  Substack: BookOpenText,
-  Medium: Newspaper,
-  Email: Mail,
-  Strava: Activity,
+const brandColorMap: Record<string, string> = {
+  GitHub: "#f0f6fc",
+  LinkedIn: "#0a66c2",
+  "Twitter / X": "#f0f0f0",
+  Instagram: "#e4405f",
+  YouTube: "#ff0000",
+  Spotify: "#1db954",
+  Substack: "#ff6719",
+  Medium: "#f0f0f0",
+  Email: "#ea4335",
+  Strava: "#fc4c02",
+};
+
+const iconMap: Record<string, IconType> = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedinIn,
+  "Twitter / X": FaXTwitter,
+  Instagram: FaInstagram,
+  YouTube: FaYoutube,
+  Spotify: FaSpotify,
+  Substack: SiSubstack,
+  Medium: FaMedium,
+  Email: HiOutlineMail,
+  Strava: FaStrava,
 };
 
 interface ContentRowProps {
@@ -71,6 +74,7 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
         >
           {row.items.map((item, index) => {
             const Icon = iconMap[item.title];
+            const brandColor = brandColorMap[item.title];
             return (
               <motion.button
                 key={item.id}
@@ -81,10 +85,14 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
                 onClick={() => onItemClick(item)}
                 className="netflix-card group relative flex w-[230px] flex-shrink-0 flex-col overflow-hidden rounded-[4px] bg-[#181818] text-left transition-transform duration-300 hover:z-10 hover:scale-[1.4] hover:shadow-[0_0_20px_rgba(0,0,0,0.7)] sm:w-[250px] lg:w-[280px]"
               >
-                {/* Card top — icon or fallback */}
+                {/* Card top — brand logo */}
                 <div className="flex h-[140px] items-center justify-center bg-gradient-to-br from-[#333] to-[#1a1a1a]">
                   {Icon ? (
-                    <Icon className="h-14 w-14 text-white/40 transition-colors group-hover:text-white/70" />
+                    <Icon
+                      size={56}
+                      className="transition-all duration-300 group-hover:scale-110"
+                      style={{ color: brandColor ?? "rgba(255,255,255,0.4)" }}
+                    />
                   ) : (
                     <span className="text-lg font-bold text-white/20">{item.title}</span>
                   )}
