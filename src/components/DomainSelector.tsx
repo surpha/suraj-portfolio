@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { DomainConfig, PersonalMetadata } from "@/types";
 import {
   Briefcase,
@@ -13,38 +14,62 @@ import {
 } from "lucide-react";
 import { type ReactNode } from "react";
 
+const ParticleField = dynamic(() => import("@/components/ParticleField"), {
+  ssr: false,
+});
+
 interface DomainSelectorProps {
   domains: DomainConfig[];
   personal: PersonalMetadata;
   onSelect: (domainId: string) => void;
 }
 
-const profileIcons: Record<string, ReactNode> = {
-  experience: <Briefcase size={36} strokeWidth={1.5} />,
-  education: <GraduationCap size={36} strokeWidth={1.5} />,
-  "data-science": <BrainCircuit size={36} strokeWidth={1.5} />,
-  sidequests: <Rocket size={36} strokeWidth={1.5} />,
-  activities: <Activity size={36} strokeWidth={1.5} />,
-  network: <Globe size={36} strokeWidth={1.5} />,
+const domainMeta: Record<string, { icon: ReactNode; glow: string }> = {
+  experience: {
+    icon: <Briefcase size={32} strokeWidth={1.5} />,
+    glow: "139, 92, 246",
+  },
+  education: {
+    icon: <GraduationCap size={32} strokeWidth={1.5} />,
+    glow: "59, 130, 246",
+  },
+  "data-science": {
+    icon: <BrainCircuit size={32} strokeWidth={1.5} />,
+    glow: "99, 102, 241",
+  },
+  sidequests: {
+    icon: <Rocket size={32} strokeWidth={1.5} />,
+    glow: "236, 72, 153",
+  },
+  activities: {
+    icon: <Activity size={32} strokeWidth={1.5} />,
+    glow: "34, 197, 94",
+  },
+  network: {
+    icon: <Globe size={32} strokeWidth={1.5} />,
+    glow: "6, 182, 212",
+  },
 };
 
 export default function DomainSelector({ domains, personal, onSelect }: DomainSelectorProps) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-4 py-16">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a0a0a] px-4 py-16">
+      <ParticleField />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center"
       >
         {/* About Me */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-12 flex flex-col items-center text-center"
+          className="mb-14 flex flex-col items-center text-center"
         >
           <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
             {personal.name}
@@ -66,33 +91,37 @@ export default function DomainSelector({ domains, personal, onSelect }: DomainSe
         </motion.div>
 
         {/* Section label */}
-        <p className="mb-8 text-base text-[#808080] sm:text-lg">
+        <p className="mb-8 text-sm tracking-widest text-[#666] uppercase">
           Select a profile to explore
         </p>
 
         <div className="flex flex-wrap items-start justify-center gap-5 sm:gap-6">
-          {domains.map((domain, index) => (
-            <motion.button
-              key={domain.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              onClick={() => onSelect(domain.id)}
-              className="group flex flex-col items-center gap-3"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.5)" }}
-                whileTap={{ scale: 0.97 }}
-                className="flex h-[100px] w-[100px] items-center justify-center rounded-xl border border-[#333] bg-transparent text-[#808080] transition-colors group-hover:text-white sm:h-[120px] sm:w-[120px]"
+          {domains.map((domain, index) => {
+            const meta = domainMeta[domain.id] ?? domainMeta["data-science"];
+            return (
+              <motion.button
+                key={domain.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                onClick={() => onSelect(domain.id)}
+                className="neon-card group flex flex-col items-center gap-3"
+                style={{ "--neon-rgb": meta.glow } as React.CSSProperties}
               >
-                {profileIcons[domain.id] ?? <Briefcase size={36} strokeWidth={1.5} />}
-              </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="neon-card-inner flex h-[100px] w-[100px] items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-[#808080] backdrop-blur-sm transition-all duration-300 group-hover:text-white sm:h-[120px] sm:w-[120px]"
+                >
+                  {meta.icon}
+                </motion.div>
 
-              <span className="text-xs text-[#808080] transition-colors group-hover:text-white sm:text-sm">
-                {domain.title}
-              </span>
-            </motion.button>
-          ))}
+                <span className="text-xs text-[#666] transition-colors group-hover:text-white sm:text-sm">
+                  {domain.title}
+                </span>
+              </motion.button>
+            );
+          })}
         </div>
 
         {/* Recruiter CTA */}
@@ -101,7 +130,7 @@ export default function DomainSelector({ domains, personal, onSelect }: DomainSe
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           onClick={() => router.push("/recruiter")}
-          className="mt-16 border border-[#808080] px-6 py-2 text-sm font-medium tracking-[0.2em] text-[#808080] transition-colors hover:border-white hover:text-white"
+          className="mt-16 border border-[#333] px-6 py-2 text-sm font-medium tracking-[0.2em] text-[#666] transition-all hover:border-[#6366f1]/50 hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]"
         >
           ARE YOU A RECRUITER?
         </motion.button>

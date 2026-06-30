@@ -41,3 +41,21 @@ body {
 .profile-avatar-3 { background: linear-gradient(135deg, #e87c03 0%, #a35502 100%); }
 .profile-avatar-4 { background: linear-gradient(135deg, #9b59b6 0%, #5b2d8e 100%); }
 .profile-avatar-5 { background: linear-gradient(135deg, #f1c40f 0%, #b7950b 100%); }
+
+/* Neon glow cards */
+.neon-card {
+  --neon-rgb: 99, 102, 241;
+}
+
+.neon-card .neon-card-inner {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.neon-card:hover .neon-card-inner {
+  border-color: rgba(var(--neon-rgb), 0.6);
+  box-shadow:
+    0 0 15px rgba(var(--neon-rgb), 0.15),
+    0 0 40px rgba(var(--neon-rgb), 0.1),
+    inset 0 0 20px rgba(var(--neon-rgb), 0.05);
+  background: rgba(var(--neon-rgb), 0.05);
+}
