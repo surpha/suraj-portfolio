@@ -4,8 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaYoutube, FaSpotify, FaStrava, FaMedium } from "react-icons/fa6";
-import { SiSubstack, SiHevy } from "react-icons/si";
+import { SiSubstack, SiHevy, SiLetterboxd } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
+import { IoRestaurant } from "react-icons/io5";
 import { type IconType } from "react-icons";
 import { MediaItem } from "@/types";
 
@@ -21,6 +22,8 @@ const iconMap: Record<string, IconType> = {
   Email: HiOutlineMail,
   Strava: FaStrava,
   Hevy: SiHevy,
+  Letterboxd: SiLetterboxd,
+  Beli: IoRestaurant,
 };
 
 const brandColorMap: Record<string, string> = {
@@ -35,6 +38,8 @@ const brandColorMap: Record<string, string> = {
   Email: "#ea4335",
   Strava: "#fc4c02",
   Hevy: "#2563eb",
+  Letterboxd: "#00d735",
+  Beli: "#ff6b35",
 };
 
 interface NetworkHeroProps {

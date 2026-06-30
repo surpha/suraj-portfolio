@@ -122,8 +122,8 @@
               "id": "net-1",
               "title": "GitHub",
               "description": "",
-              "tag": "Code Base",
-              "link": "https://github.com"
+              "tag": "Code",
+              "link": "https://github.com/surpha"
             }
           ]
         },
@@ -134,35 +134,35 @@
               "id": "net-4",
               "title": "Twitter / X",
               "description": "",
-              "tag": "Micro Blog",
-              "link": "https://x.com"
+              "tag": "Social",
+              "link": "https://x.com/surpharosh"
             },
             {
               "id": "net-5",
               "title": "Instagram",
               "description": "",
-              "tag": "Visual Feed",
-              "link": "https://instagram.com"
+              "tag": "Social",
+              "link": "https://www.instagram.com/surpharosh"
             },
             {
               "id": "net-2",
               "title": "LinkedIn",
               "description": "",
-              "tag": "Corporate Network",
-              "link": "https://linkedin.com"
+              "tag": "Social",
+              "link": "https://www.linkedin.com/in/suraj-phalod-26a042204/"
             },
             {
               "id": "net-3",
               "title": "Substack",
               "description": "",
-              "tag": "Newsletter",
+              "tag": "Writing",
               "link": "https://substack.com"
             },
             {
               "id": "net-6",
               "title": "Medium",
               "description": "",
-              "tag": "Publication",
+              "tag": "Writing",
               "link": "https://medium.com"
             }
           ]
@@ -175,14 +175,14 @@
               "title": "Strava",
               "description": "",
               "tag": "Running",
-              "link": "https://strava.com"
+              "link": "https://strava.app.link/H4b3DrlKo4b"
             },
             {
               "id": "net-11",
               "title": "Hevy",
               "description": "",
               "tag": "Gym",
-              "link": "https://hevy.com"
+              "link": "https://hevy.com/user/surajp11"
             }
           ]
         },
@@ -201,7 +201,26 @@
               "title": "Spotify",
               "description": "",
               "tag": "Music",
-              "link": "https://spotify.com"
+              "link": "https://open.spotify.com/user/53xl0upn3psbrk8f2axy50unz?si=c5Q-cbW9QNaly0D5tnvwtA"
+            },
+            {
+              "id": "net-12",
+              "title": "Letterboxd",
+              "description": "",
+              "tag": "Film",
+              "link": "https://letterboxd.com"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Food & Lifestyle",
+          "items": [
+            {
+              "id": "net-13",
+              "title": "Beli",
+              "description": "",
+              "tag": "Food",
+              "link": "https://beli.com"
             }
           ]
         },
