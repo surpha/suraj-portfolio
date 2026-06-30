@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 import { PersonalMetadata, DomainConfig } from "@/types";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { SiSubstack } from "react-icons/si";
@@ -111,6 +112,12 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
             >
               Resume <ExternalLink size={11} />
             </a>
+            <Link
+              href="/recruiter"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#808080] transition-all hover:border-white/25 hover:text-white"
+            >
+              Recruiter
+            </Link>
           </div>
         </motion.nav>
 
@@ -124,10 +131,13 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
               {/* Photo */}
               <div className="relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#6366f1]/20 to-[#8b5cf6]/20 sm:h-32 sm:w-32">
-                {/* Replace with <Image src="/photo.jpg" ... /> when you have a photo */}
-                <div className="flex h-full w-full items-center justify-center text-3xl font-bold text-[#6366f1]">
-                  SP
-                </div>
+                  <Image
+                  src="/IMG-20260424-WA0154.jpg"
+                  alt="Suraj Phalod"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
 
               <div className="min-w-0 flex-1">
@@ -190,10 +200,10 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
           {/* Featured Projects — full width */}
           <motion.div
             {...anim(0.3)}
-            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-sm lg:col-span-3"
+            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 backdrop-blur-sm lg:col-span-3"
           >
-            <div className="mb-5 flex items-center justify-between">
-              <h3 className="text-sm font-semibold tracking-wide text-white uppercase">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-xs font-semibold tracking-wide text-white uppercase">
                 Featured Projects
               </h3>
               <button
@@ -203,23 +213,23 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                 View All <ArrowRight size={12} />
               </button>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {featuredProjects.map((proj, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 + i * 0.08, duration: 0.4 }}
-                  className="group cursor-pointer rounded-xl border border-white/[0.05] bg-white/[0.02] p-5 transition-all hover:border-white/15 hover:bg-white/[0.04]"
+                  className="group cursor-pointer rounded-xl border border-white/[0.05] bg-white/[0.02] p-4 transition-all hover:border-white/15 hover:bg-white/[0.04]"
                 >
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[11px] font-medium text-[#888]">
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] font-medium text-[#888]">
                       {proj.tag}
                     </span>
-                    <ArrowRight size={14} className="text-[#555] transition-colors group-hover:text-white" />
+                    <ArrowRight size={12} className="text-[#555] transition-colors group-hover:text-white" />
                   </div>
-                  <h4 className="text-lg font-semibold text-white">{proj.title}</h4>
-                  <p className="mt-1.5 text-sm text-[#808080]">{proj.desc}</p>
+                  <h4 className="text-sm font-semibold text-white">{proj.title}</h4>
+                  <p className="mt-1 text-xs text-[#808080]">{proj.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -239,7 +249,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               All Profiles <ArrowRight size={12} />
             </button>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {domains.map((domain, i) => {
               const glow = domainGlow[domain.id] ?? "99, 102, 241";
               return (
@@ -249,13 +259,13 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.55 + i * 0.04, duration: 0.3 }}
                   onClick={() => onSelectDomain(domain.id)}
-                  className="neon-card group flex flex-col items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-5 transition-all hover:border-white/15 hover:bg-white/[0.04]"
+                  className="neon-card group flex flex-col items-center gap-3.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-6 transition-all hover:border-white/15 hover:bg-white/[0.04]"
                   style={{ "--neon-rgb": glow } as React.CSSProperties}
                 >
-                  <div className="neon-card-inner flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-[#808080] transition-all group-hover:text-white">
+                  <div className="neon-card-inner flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 text-[#808080] transition-all group-hover:text-white">
                     {domainIcons[domain.id] ?? <Briefcase size={20} />}
                   </div>
-                  <span className="text-xs font-semibold text-[#888] transition-colors group-hover:text-white">
+                  <span className="text-sm font-semibold text-[#888] transition-colors group-hover:text-white">
                     {domain.title}
                   </span>
                 </motion.button>

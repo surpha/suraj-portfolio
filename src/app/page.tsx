@@ -26,7 +26,7 @@ export default function Home() {
         }}
         onReset={() => {
           setCurrentDomain(null);
-          setView("profiles");
+          setView("landing");
         }}
       />
     );
