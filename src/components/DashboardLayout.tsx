@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Search, Bell } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { DomainConfig, PersonalMetadata, MediaItem } from "@/types";
 import HeroBanner from "./HeroBanner";
 import ContentRow from "./ContentRow";
@@ -25,6 +24,8 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -32,32 +33,42 @@ export default function DashboardLayout({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#141414]">
-      {/* Netflix-style top nav — transparent → black on scroll */}
+    <div className="min-h-screen bg-[#0a0a0a]">
+      {/* Top nav */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-40 flex items-center px-[4%] py-3 transition-colors duration-500 ${
-          scrolled ? "bg-[#141414]" : "bg-gradient-to-b from-black/80 to-transparent"
+        className={`fixed left-0 right-0 top-0 z-40 flex items-center px-[4%] py-3 transition-all duration-500 ${
+          scrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md shadow-lg" : "bg-gradient-to-b from-black/70 to-transparent"
         }`}
       >
         {/* Logo / Brand */}
         <button
           onClick={onReset}
-          className="mr-6 text-xl font-extrabold tracking-tight text-[#e50914] transition-opacity hover:opacity-80 sm:text-2xl"
+          className="mr-6 text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-70 sm:text-xl"
         >
-          SURAJFLIX
+          {personal.name.split(" ")[0]}
         </button>
 
         {/* Nav links — domain switching */}
-        <div className="scrollbar-hide flex items-center gap-1 overflow-x-auto sm:gap-4">
+        <div className="scrollbar-hide flex items-center gap-1 overflow-x-auto sm:gap-3">
           {allDomains.map((d) => (
             <button
               key={d.id}
               onClick={() => onSwitchDomain(d.id)}
-              className={`whitespace-nowrap px-1 py-1 text-xs font-medium transition-colors sm:text-sm ${
+              className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium transition-all sm:text-sm ${
                 d.id === domain.id
-                  ? "text-white font-bold"
-                  : "text-[#e5e5e5] hover:text-[#b3b3b3]"
+                  ? "bg-white/10 text-white"
+                  : "text-white/60 hover:text-white/90"
               }`}
             >
               {d.title}
@@ -65,18 +76,43 @@ export default function DashboardLayout({
           ))}
         </div>
 
-        {/* Right side icons */}
-        <div className="ml-auto flex items-center gap-4">
-          <Search className="h-4 w-4 text-white cursor-pointer hover:text-[#b3b3b3] transition-colors" />
-          <Bell className="h-4 w-4 text-white cursor-pointer hover:text-[#b3b3b3] transition-colors" />
-          <a
-            href={personal.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-[#e50914] text-xs font-bold text-white transition-colors hover:bg-[#f40612]"
+        {/* Right side — profile button with dropdown */}
+        <div className="relative ml-auto" ref={dropdownRef}>
+          <button
+            onClick={() => setProfileOpen(!profileOpen)}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-600 text-xs font-bold text-white transition-transform hover:scale-105"
           >
             SP
-          </a>
+          </button>
+
+          {/* Dropdown */}
+          {profileOpen && (
+            <div className="absolute right-0 top-12 w-48 overflow-hidden rounded-lg border border-white/10 bg-[#1a1a1a] shadow-2xl">
+              <a
+                href={personal.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
+              >
+                <span className="text-base">📄</span>
+                View Resume
+              </a>
+              <a
+                href="mailto:hello@surajphalod.com"
+                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
+              >
+                <span className="text-base">✉️</span>
+                Contact
+              </a>
+              <button
+                onClick={() => { onReset(); setProfileOpen(false); }}
+                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
+              >
+                <span className="text-base">🏠</span>
+                Switch Profile
+              </button>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -84,17 +120,15 @@ export default function DashboardLayout({
       {domain.id === "network" && domain.rows[0] ? (
         <NetworkHero
           items={domain.rows.flatMap((r) => r.items)}
-          resumeUrl={personal.resumeUrl}
         />
       ) : (
         <HeroBanner
           hero={domain.hero}
           domainTitle={domain.title}
-          resumeUrl={personal.resumeUrl}
         />
       )}
 
-      {/* Content rows — Netflix-style */}
+      {/* Content rows */}
       <div className="relative z-10 -mt-16 pb-16">
         {domain.rows.map((row) => (
           <ContentRow

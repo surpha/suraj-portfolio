@@ -44,10 +44,9 @@ const brandColorMap: Record<string, string> = {
 
 interface NetworkHeroProps {
   items: MediaItem[];
-  resumeUrl: string;
 }
 
-export default function NetworkHero({ items, resumeUrl }: NetworkHeroProps) {
+export default function NetworkHero({ items }: NetworkHeroProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -67,15 +66,15 @@ export default function NetworkHero({ items, resumeUrl }: NetworkHeroProps) {
 
   return (
     <section
-      className="relative flex min-h-[85vh] flex-col justify-end bg-[#141414]"
+      className="relative flex min-h-[80vh] flex-col justify-end bg-[#0a0a0a]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       {/* Background gradients */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#141414]" />
-        <div className="absolute inset-x-0 top-0 h-[72px] bg-gradient-to-b from-[#141414]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a]" />
+        <div className="absolute inset-x-0 top-0 h-[72px] bg-gradient-to-b from-[#0a0a0a]/80 to-transparent" />
       </div>
 
       {/* Content */}
@@ -140,20 +139,12 @@ export default function NetworkHero({ items, resumeUrl }: NetworkHeroProps) {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-[4px] bg-white px-6 py-2 text-base font-semibold text-black transition-colors hover:bg-white/75"
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-2 text-sm font-semibold text-black transition-colors hover:bg-white/75"
                 >
-                  <ExternalLink className="h-5 w-5" />
+                  <ExternalLink className="h-4 w-4" />
                   Visit {item.title}
                 </a>
               )}
-              <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-[4px] bg-[#6d6d6e]/70 px-6 py-2 text-base font-semibold text-white transition-colors hover:bg-[#6d6d6e]/40"
-              >
-                Download Resume
-              </a>
             </div>
           </motion.div>
         </AnimatePresence>
