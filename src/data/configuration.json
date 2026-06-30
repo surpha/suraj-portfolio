@@ -1,0 +1,147 @@
+{
+  "personal": {
+    "name": "Suraj Phalod",
+    "headline": "Product Supply Data Science Manager",
+    "company": "Procter & Gamble (P&G)",
+    "education": "BITS Pilani Dual Degree (B.E. Computer Science & M.Sc. Economics & Finance)",
+    "resumeUrl": "/docs/Suraj_Phalod_Resume.pdf"
+  },
+  "domains": {
+    "data-science": {
+      "id": "data-science",
+      "title": "Data Science & AI",
+      "tagline": "Optimizing complex product supply ecosystems with production-grade ML models.",
+      "hero": {
+        "title": "Data Science & ML at P&G",
+        "description": "Leading supply chain intelligence and predictive systems in Mumbai, India.",
+        "badge": "Core Domain",
+        "actionLabel": "Download Resume"
+      },
+      "rows": [
+        {
+          "rowTitle": "Core Competencies",
+          "items": [
+            {
+              "id": "ds-1",
+              "title": "Supply Chain Analytics",
+              "description": "Automating logistics and predictive inventory tracking using Python automation stacks.",
+              "tag": "Expertise"
+            },
+            {
+              "id": "ds-2",
+              "title": "Predictive Modeling",
+              "description": "Deploying machine learning workflows on massive data frames to mitigate disruption.",
+              "tag": "ML Ops"
+            }
+          ]
+        }
+      ]
+    },
+    "sidequests": {
+      "id": "sidequests",
+      "title": "Sidequests & Ventures",
+      "tagline": "Building physical hardware solutions, automation agencies, and heritage hospitality platforms.",
+      "hero": {
+        "title": "Sanyam App (Distraction Blocker)",
+        "description": "A physical companion app built to eliminate phone dependency using hardware NFC tags.",
+        "badge": "Trending Build",
+        "actionLabel": "View Repository"
+      },
+      "rows": [
+        {
+          "rowTitle": "Active Builds",
+          "items": [
+            {
+              "id": "sq-1",
+              "title": "Sanyam App",
+              "description": "Android application integrating NFC tag physical cues to block distracting digital layers instantly.",
+              "tag": "Python / Mobile",
+              "link": "https://github.com"
+            },
+            {
+              "id": "sq-2",
+              "title": "Shiva Kingdom Farm Stay",
+              "description": "Scaling and rebranding an ancestral heritage Airbnb estate in Udaipur with automated booking workflows and AI guest agents.",
+              "tag": "Hospitality Automation"
+            },
+            {
+              "id": "sq-3",
+              "title": "SOCaiL Media",
+              "description": "An automated, AI-assisted agile digital marketing and operational content strategy framework.",
+              "tag": "Agency"
+            }
+          ]
+        }
+      ]
+    },
+    "activities": {
+      "id": "activities",
+      "title": "Activities & Life",
+      "tagline": "Vocal performances, running metrics, and high-frequency lifestyle habits.",
+      "hero": {
+        "title": "The 5kg Running Challenge",
+        "description": "Currently tracking performance thresholds and cardiovascular goals using structured tracking frames.",
+        "badge": "Active Goal",
+        "actionLabel": "View Stats"
+      },
+      "rows": [
+        {
+          "rowTitle": "Metrics & Soundtracks",
+          "items": [
+            {
+              "id": "act-1",
+              "title": "Strava Run Engine",
+              "description": "Dynamic fitness data and active logs tracing athletic consistency and speed goals.",
+              "tag": "Fitness API"
+            },
+            {
+              "id": "act-2",
+              "title": "Spotify & Vocal Music",
+              "description": "Curating soundscapes and organizing acoustic vocal performance spaces like Shaam-e-Sukoon.",
+              "tag": "Music Hub"
+            }
+          ]
+        }
+      ]
+    },
+    "network": {
+      "id": "network",
+      "title": "The Network",
+      "tagline": "Direct routers to my written thoughts and social nodes across the web.",
+      "hero": {
+        "title": "Substack Publication",
+        "description": "Long-form written logs dissecting data architecture, business decisions, and lifestyle optimization.",
+        "badge": "Writing",
+        "actionLabel": "Read Essays"
+      },
+      "rows": [
+        {
+          "rowTitle": "Social Gateways",
+          "items": [
+            {
+              "id": "net-1",
+              "title": "GitHub",
+              "description": "Source files, automation scripts, repositories for Sanyam, and software logic.",
+              "tag": "Code Base",
+              "link": "https://github.com"
+            },
+            {
+              "id": "net-2",
+              "title": "LinkedIn",
+              "description": "Professional networks, enterprise achievements at P&G, and engineering updates.",
+              "tag": "Corporate Network",
+              "link": "https://linkedin.com"
+            },
+            {
+              "id": "net-3",
+              "title": "Substack",
+              "description": "Essays and case studies regarding engineering and business strategy.",
+              "tag": "Newsletter",
+              "link": "https://substack.com"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
