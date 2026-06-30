@@ -138,6 +138,55 @@
               "description": "Essays and case studies regarding engineering and business strategy.",
               "tag": "Newsletter",
               "link": "https://substack.com"
+            },
+            {
+              "id": "net-4",
+              "title": "Twitter / X",
+              "description": "Quick takes, threads, and real-time commentary on data, tech, and business.",
+              "tag": "Micro Blog",
+              "link": "https://x.com"
+            },
+            {
+              "id": "net-5",
+              "title": "Instagram",
+              "description": "Visual stories, behind-the-scenes moments, and lifestyle snapshots.",
+              "tag": "Visual Feed",
+              "link": "https://instagram.com"
+            },
+            {
+              "id": "net-6",
+              "title": "Medium",
+              "description": "Long-form technical articles on data science, ML ops, and engineering craft.",
+              "tag": "Publication",
+              "link": "https://medium.com"
+            },
+            {
+              "id": "net-7",
+              "title": "YouTube",
+              "description": "Video content, tutorials, and walkthroughs on projects and ideas.",
+              "tag": "Video",
+              "link": "https://youtube.com"
+            },
+            {
+              "id": "net-8",
+              "title": "Spotify",
+              "description": "Playlists, vocal performances, and curated soundscapes including Shaam-e-Sukoon.",
+              "tag": "Music",
+              "link": "https://spotify.com"
+            },
+            {
+              "id": "net-9",
+              "title": "Strava",
+              "description": "Running logs, fitness metrics, and athletic performance tracking.",
+              "tag": "Fitness",
+              "link": "https://strava.com"
+            },
+            {
+              "id": "net-10",
+              "title": "Email",
+              "description": "Direct line for collaborations, inquiries, and professional outreach.",
+              "tag": "Contact",
+              "link": "mailto:hello@surajphalod.com"
             }
           ]
         }
