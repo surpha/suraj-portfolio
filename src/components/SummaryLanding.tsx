@@ -86,12 +86,12 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
         {/* Top bar — name + socials */}
         <motion.nav
           {...anim(0)}
-          className="mb-10 flex items-center justify-between"
+          className="mb-10 flex flex-wrap items-center justify-between gap-3"
         >
           <h1 className="text-2xl font-bold text-white sm:text-3xl">
             {personal.name}
           </h1>
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             {socialLinks.map((s) => (
               <a
                 key={s.label}
@@ -99,7 +99,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-[#aaa] transition-all hover:bg-white/5 hover:text-white"
+                className="hidden h-9 w-9 items-center justify-center rounded-full text-[#aaa] transition-all hover:bg-white/5 hover:text-white sm:flex"
               >
                 {s.icon}
               </a>
@@ -108,13 +108,13 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               href={personal.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white sm:ml-2 sm:px-4 sm:py-2"
             >
               Resume <ExternalLink size={11} />
             </a>
             <Link
               href="/recruiter"
-              className="flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white"
+              className="flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-[#aaa] transition-all hover:border-white/25 hover:text-white sm:px-4 sm:py-2"
             >
               Recruiter
             </Link>
@@ -126,25 +126,26 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
           {/* LEFT: About me + photo — spans 2 cols */}
           <motion.div
             {...anim(0.1)}
-            className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 backdrop-blur-sm lg:col-span-2"
+            className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 backdrop-blur-sm sm:p-7 lg:col-span-2"
           >
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
               {/* Photo */}
-              <div className="relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#6366f1]/20 to-[#8b5cf6]/20 sm:h-32 sm:w-32">
+              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#6366f1]/20 to-[#8b5cf6]/20 sm:h-32 sm:w-32">
                   <Image
                   src="/IMG-20260424-WA0154.jpg"
                   alt="Suraj Phalod"
                   fill
+                  sizes="(max-width: 640px) 96px, 128px"
                   className="object-cover"
                   priority
                 />
               </div>
 
               <div className="min-w-0 flex-1">
-                <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                <h2 className="text-2xl font-bold text-white sm:text-4xl">
                   {personal.name}
                 </h2>
-                <p className="mt-2 text-lg text-[#b3b3b3]">
+                <p className="mt-1 text-base text-[#b3b3b3] sm:mt-2 sm:text-lg">
                   {personal.headline}
                 </p>
                 <div className="mt-2 flex items-center gap-2 text-sm text-[#aaa]">
@@ -154,12 +155,28 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               </div>
             </div>
 
-            <p className="mt-6 text-base leading-relaxed text-[#bbb]">
+            <p className="mt-4 text-sm leading-relaxed text-[#bbb] sm:mt-6 sm:text-base">
               {personal.about}
             </p>
-            <p className="mt-3 text-sm text-[#bbb]">
+            <p className="mt-2 text-xs text-[#bbb] sm:mt-3 sm:text-sm">
               {personal.education}
             </p>
+
+            {/* Social links — visible only on mobile */}
+            <div className="mt-4 flex items-center gap-2 sm:hidden">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-[#aaa] transition-all hover:bg-white/5 hover:text-white"
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
           </motion.div>
 
           {/* RIGHT: Experience */}
@@ -213,7 +230,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                 View All <ArrowRight size={12} />
               </button>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {featuredProjects.map((proj, i) => (
                 <motion.div
                   key={i}
@@ -249,7 +266,7 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
               All Profiles <ArrowRight size={12} />
             </button>
           </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
             {domains.map((domain, i) => {
               const glow = domainGlow[domain.id] ?? "99, 102, 241";
               return (
@@ -262,10 +279,10 @@ export default function SummaryLanding({ personal, domains, onExplore, onSelectD
                   className="neon-card group flex flex-col items-center gap-3.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-6 transition-all hover:border-white/15 hover:bg-white/[0.04]"
                   style={{ "--neon-rgb": glow } as React.CSSProperties}
                 >
-                  <div className="neon-card-inner flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 text-[#aaa] transition-all group-hover:text-white">
+                  <div className="neon-card-inner flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-[#aaa] transition-all group-hover:text-white sm:h-12 sm:w-12">
                     {domainIcons[domain.id] ?? <Briefcase size={20} />}
                   </div>
-                  <span className="text-sm font-semibold text-[#bbb] transition-colors group-hover:text-white">
+                  <span className="text-xs font-semibold text-[#bbb] transition-colors group-hover:text-white sm:text-sm">
                     {domain.title}
                   </span>
                 </motion.button>

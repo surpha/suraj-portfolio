@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { DomainConfig, PersonalMetadata, MediaItem } from "@/types";
 import HeroBanner from "./HeroBanner";
 import ContentRow from "./ContentRow";
@@ -25,8 +25,6 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -34,39 +32,29 @@ export default function DashboardLayout({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setProfileOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       {/* Top nav */}
       <nav
-        className={`fixed left-0 right-0 top-0 z-40 flex items-center px-[4%] py-3 transition-all duration-500 ${
+        className={`fixed left-0 right-0 top-0 z-40 flex items-center px-3 py-2.5 transition-all duration-500 sm:px-[4%] sm:py-3 ${
           scrolled ? "bg-[#0a0a0a]/95 backdrop-blur-md shadow-lg" : "bg-gradient-to-b from-black/70 to-transparent"
         }`}
       >
         {/* Logo / Brand */}
         <button
           onClick={onReset}
-          className="mr-6 text-lg font-bold tracking-tight text-white transition-opacity hover:opacity-70 sm:text-xl"
+          className="mr-3 flex-shrink-0 text-base font-bold tracking-tight text-white transition-opacity hover:opacity-70 sm:mr-6 sm:text-xl"
         >
           {personal.name.split(" ")[0]}
         </button>
 
         {/* Nav links — domain switching */}
-        <div className="scrollbar-hide flex items-center gap-1 overflow-x-auto sm:gap-3">
+        <div className="scrollbar-hide flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto sm:gap-3">
           {allDomains.map((d) => (
             <button
               key={d.id}
               onClick={() => onSwitchDomain(d.id)}
-              className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium transition-all sm:text-sm ${
+              className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-medium transition-all sm:px-3 sm:text-sm ${
                 d.id === domain.id
                   ? "bg-white/10 text-white"
                   : "text-white/60 hover:text-white/90"
@@ -77,43 +65,22 @@ export default function DashboardLayout({
           ))}
         </div>
 
-        {/* Right side — profile button with dropdown */}
-        <div className="relative ml-auto" ref={dropdownRef}>
-          <button
-            onClick={() => setProfileOpen(!profileOpen)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-600 text-xs font-bold text-white transition-transform hover:scale-105"
+        {/* Right side — Resume & Contact */}
+        <div className="ml-2 flex flex-shrink-0 items-center gap-1.5 sm:ml-auto sm:gap-2">
+          <a
+            href={personal.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-medium text-white/80 transition-all hover:border-white/25 hover:text-white sm:text-xs"
           >
-            SP
-          </button>
-
-          {/* Dropdown */}
-          {profileOpen && (
-            <div className="absolute right-0 top-12 w-48 overflow-hidden rounded-lg border border-white/10 bg-[#1a1a1a] shadow-2xl">
-              <a
-                href={personal.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
-              >
-                <span className="text-base">📄</span>
-                View Resume
-              </a>
-              <a
-                href="mailto:hello@surajphalod.com"
-                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
-              >
-                <span className="text-base">✉️</span>
-                Contact
-              </a>
-              <button
-                onClick={() => { onReset(); setProfileOpen(false); }}
-                className="flex w-full items-center gap-3 px-4 py-3 text-sm text-white/90 transition-colors hover:bg-white/5"
-              >
-                <span className="text-base">🏠</span>
-                Switch Profile
-              </button>
-            </div>
-          )}
+            Resume
+          </a>
+          <a
+            href="mailto:hello@surajphalod.com"
+            className="rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-medium text-white/80 transition-all hover:border-white/25 hover:text-white sm:text-xs"
+          >
+            Contact
+          </a>
         </div>
       </nav>
 
