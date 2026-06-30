@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap } from "lucide-react";
+import Image from "next/image";
 import { EducationEntry } from "@/types";
 
 interface EducationTimelineProps {
@@ -43,21 +43,21 @@ export default function EducationTimeline({ entries }: EducationTimelineProps) {
                   </h3>
 
                   {/* Degree */}
-                  <p className="mt-1 text-sm text-[#b3b3b3]">
+                  <p className="mt-1 text-sm text-[#ccc]">
                     {entry.degree}
                   </p>
 
                   {/* Coursework */}
                   {entry.coursework && entry.coursework.length > 0 && (
                     <div className="mt-4">
-                      <p className="mb-2 text-xs font-medium tracking-wider text-[#666] uppercase">
+                      <p className="mb-2 text-xs font-medium tracking-wider text-[#999] uppercase">
                         Relevant Coursework
                       </p>
                       <div className="flex flex-wrap gap-1.5">
                         {entry.coursework.map((course) => (
                           <span
                             key={course}
-                            className="rounded-full border border-white/[0.08] bg-white/[0.04] px-2.5 py-1 text-xs text-[#999]"
+                            className="rounded-full border border-white/[0.08] bg-white/[0.04] px-2.5 py-1 text-xs text-[#bbb]"
                           >
                             {course}
                           </span>
@@ -67,9 +67,19 @@ export default function EducationTimeline({ entries }: EducationTimelineProps) {
                   )}
                 </div>
 
-                {/* Logo placeholder */}
-                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] text-[#555] sm:h-16 sm:w-16">
-                  <GraduationCap size={28} strokeWidth={1.5} />
+                {/* Logo */}
+                <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.03] sm:h-16 sm:w-16">
+                  {entry.logo ? (
+                    <Image
+                      src={entry.logo}
+                      alt={entry.school}
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold text-[#999]">🎓</span>
+                  )}
                 </div>
               </div>
             </motion.div>

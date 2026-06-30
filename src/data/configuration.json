@@ -76,14 +76,14 @@
           "school": "PACE Junior Science College, Mumbai",
           "degree": "HSC & JEE Coaching",
           "duration": "2018 — 2020",
-          "logo": "/logos/pace.png"
+          "logo": "/logos/pace.jpeg"
         },
         {
           "id": "edu-4",
           "school": "Lokhandwala Foundation School, Mumbai",
           "degree": "ICSE",
           "duration": "2008 — 2018",
-          "logo": "/logos/lfs.png"
+          "logo": "/logos/lfs.jpeg"
         }
       ],
       "rows": [
