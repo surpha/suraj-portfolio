@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DomainConfig, PersonalMetadata, MediaItem } from "@/types";
 import HeroBanner from "./HeroBanner";
 import ContentRow from "./ContentRow";
 import InfoModal from "./InfoModal";
 import NetworkHero from "./NetworkHero";
 import EducationTimeline from "./EducationTimeline";
+import { Menu, X } from "lucide-react";
 
 interface DashboardLayoutProps {
   domain: DomainConfig;
@@ -25,11 +26,23 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -48,13 +61,43 @@ export default function DashboardLayout({
           {personal.name.split(" ")[0]}
         </button>
 
-        {/* Nav links — domain switching */}
-        <div className="scrollbar-hide flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto sm:gap-3">
+        {/* Mobile: hamburger menu button */}
+        <div className="relative sm:hidden" ref={menuRef}>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1.5 text-[11px] font-medium text-white/80 transition-all hover:border-white/25"
+          >
+            {mobileMenuOpen ? <X size={14} /> : <Menu size={14} />}
+            <span>{domain.title}</span>
+          </button>
+
+          {/* Mobile dropdown */}
+          {mobileMenuOpen && (
+            <div className="absolute left-0 top-10 w-44 overflow-hidden rounded-lg border border-white/10 bg-[#141414] shadow-2xl backdrop-blur-md">
+              {allDomains.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => { onSwitchDomain(d.id); setMobileMenuOpen(false); }}
+                  className={`flex w-full items-center px-4 py-2.5 text-left text-sm transition-colors ${
+                    d.id === domain.id
+                      ? "bg-white/10 text-white"
+                      : "text-white/70 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {d.title}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Desktop: horizontal tabs */}
+        <div className="hidden min-w-0 flex-1 items-center gap-3 sm:flex">
           {allDomains.map((d) => (
             <button
               key={d.id}
               onClick={() => onSwitchDomain(d.id)}
-              className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-medium transition-all sm:px-3 sm:text-sm ${
+              className={`whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium transition-all ${
                 d.id === domain.id
                   ? "bg-white/10 text-white"
                   : "text-white/60 hover:text-white/90"
@@ -66,7 +109,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Right side — Resume & Contact */}
-        <div className="ml-2 flex flex-shrink-0 items-center gap-1.5 sm:ml-auto sm:gap-2">
+        <div className="ml-auto flex flex-shrink-0 items-center gap-1.5 sm:gap-2">
           <a
             href={personal.resumeUrl}
             target="_blank"
