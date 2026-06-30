@@ -83,7 +83,7 @@ export default function DashboardLayout({
       {/* Hero Billboard — auto-cycling for Network, standard for others */}
       {domain.id === "network" && domain.rows[0] ? (
         <NetworkHero
-          items={domain.rows[0].items}
+          items={domain.rows.flatMap((r) => r.items)}
           resumeUrl={personal.resumeUrl}
         />
       ) : (

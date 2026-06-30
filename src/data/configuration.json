@@ -116,29 +116,8 @@
       },
       "rows": [
         {
-          "rowTitle": "Social Gateways",
+          "rowTitle": "Socials",
           "items": [
-            {
-              "id": "net-1",
-              "title": "GitHub",
-              "description": "Source files, automation scripts, repositories for Sanyam, and software logic.",
-              "tag": "Code Base",
-              "link": "https://github.com"
-            },
-            {
-              "id": "net-2",
-              "title": "LinkedIn",
-              "description": "Professional networks, enterprise achievements at P&G, and engineering updates.",
-              "tag": "Corporate Network",
-              "link": "https://linkedin.com"
-            },
-            {
-              "id": "net-3",
-              "title": "Substack",
-              "description": "Essays and case studies regarding engineering and business strategy.",
-              "tag": "Newsletter",
-              "link": "https://substack.com"
-            },
             {
               "id": "net-4",
               "title": "Twitter / X",
@@ -154,12 +133,67 @@
               "link": "https://instagram.com"
             },
             {
+              "id": "net-2",
+              "title": "LinkedIn",
+              "description": "Professional networks, enterprise achievements at P&G, and engineering updates.",
+              "tag": "Corporate Network",
+              "link": "https://linkedin.com"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Writing & Publishing",
+          "items": [
+            {
+              "id": "net-3",
+              "title": "Substack",
+              "description": "Essays and case studies regarding engineering and business strategy.",
+              "tag": "Newsletter",
+              "link": "https://substack.com"
+            },
+            {
               "id": "net-6",
               "title": "Medium",
               "description": "Long-form technical articles on data science, ML ops, and engineering craft.",
               "tag": "Publication",
               "link": "https://medium.com"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Fitness & Health",
+          "items": [
+            {
+              "id": "net-9",
+              "title": "Strava",
+              "description": "Running logs, fitness metrics, and athletic performance tracking.",
+              "tag": "Running",
+              "link": "https://strava.com"
             },
+            {
+              "id": "net-11",
+              "title": "Hevy",
+              "description": "Gym workout tracking, progressive overload logs, and strength training analytics.",
+              "tag": "Gym",
+              "link": "https://hevy.com"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Code & Projects",
+          "items": [
+            {
+              "id": "net-1",
+              "title": "GitHub",
+              "description": "Source files, automation scripts, repositories for Sanyam, and software logic.",
+              "tag": "Code Base",
+              "link": "https://github.com"
+            }
+          ]
+        },
+        {
+          "rowTitle": "Music & Media",
+          "items": [
             {
               "id": "net-7",
               "title": "YouTube",
@@ -173,14 +207,12 @@
               "description": "Playlists, vocal performances, and curated soundscapes including Shaam-e-Sukoon.",
               "tag": "Music",
               "link": "https://spotify.com"
-            },
-            {
-              "id": "net-9",
-              "title": "Strava",
-              "description": "Running logs, fitness metrics, and athletic performance tracking.",
-              "tag": "Fitness",
-              "link": "https://strava.com"
-            },
+            }
+          ]
+        },
+        {
+          "rowTitle": "Contact",
+          "items": [
             {
               "id": "net-10",
               "title": "Email",

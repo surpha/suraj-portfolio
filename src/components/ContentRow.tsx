@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram, FaYoutube, FaSpotify, FaStrava, FaMedium } from "react-icons/fa6";
-import { SiSubstack } from "react-icons/si";
+import { SiSubstack, SiHevy } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
 import { ContentRow as ContentRowType, MediaItem } from "@/types";
 import { type IconType } from "react-icons";
@@ -20,6 +20,7 @@ const brandColorMap: Record<string, string> = {
   Medium: "#f0f0f0",
   Email: "#ea4335",
   Strava: "#fc4c02",
+  Hevy: "#2563eb",
 };
 
 const iconMap: Record<string, IconType> = {
@@ -33,6 +34,7 @@ const iconMap: Record<string, IconType> = {
   Medium: FaMedium,
   Email: HiOutlineMail,
   Strava: FaStrava,
+  Hevy: SiHevy,
 };
 
 interface ContentRowProps {
