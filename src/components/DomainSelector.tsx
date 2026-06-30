@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { DomainConfig } from "@/types";
+import { DomainConfig, PersonalMetadata } from "@/types";
 
 interface DomainSelectorProps {
   domains: DomainConfig[];
+  personal: PersonalMetadata;
   onSelect: (domainId: string) => void;
 }
 
@@ -18,25 +19,41 @@ const profileIcons: Record<string, string> = {
   network: "🌐",
 };
 
-export default function DomainSelector({ domains, onSelect }: DomainSelectorProps) {
+export default function DomainSelector({ domains, personal, onSelect }: DomainSelectorProps) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-4 py-16">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="flex flex-col items-center"
       >
-        <h1 className="mb-2 text-4xl font-normal text-white sm:text-[3.5rem]">
-          Suraj Phalod
-        </h1>
-        <p className="text-base text-[#808080] sm:text-lg">
+        {/* About Me */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 flex flex-col items-center text-center"
+        >
+          <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+            {personal.name}
+          </h1>
+          <p className="mt-3 text-lg text-[#b3b3b3] sm:text-xl">
+            {personal.headline} at {personal.company}
+          </p>
+          <p className="mt-1 max-w-md text-sm text-[#808080]">
+            {personal.education}
+          </p>
+        </motion.div>
+
+        {/* Section label */}
+        <p className="mb-8 text-base text-[#808080] sm:text-lg">
           Select a profile to explore
         </p>
 
-        <div className="mt-12 flex flex-wrap items-start justify-center gap-6 sm:gap-8">
+        <div className="flex flex-wrap items-start justify-center gap-6 sm:gap-8">
           {domains.map((domain, index) => (
             <motion.button
               key={domain.id}
