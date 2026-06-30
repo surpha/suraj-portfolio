@@ -61,7 +61,7 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
       </h2>
 
       {/* Scroll container with Netflix-style edge arrows */}
-      <div className="group/row relative -mx-1">
+      <div className="group/row relative -mx-1 overflow-visible">
         {/* Left arrow */}
         <button
           onClick={() => scroll("left")}
@@ -72,7 +72,7 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
 
         <div
           ref={scrollRef}
-          className="scrollbar-hide flex gap-[4px] overflow-x-auto px-1 py-3"
+          className="scrollbar-hide flex gap-2 overflow-x-auto px-1 py-6"
         >
           {row.items.map((item, index) => {
             const Icon = iconMap[item.title];
@@ -85,31 +85,24 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => onItemClick(item)}
-                className="netflix-card group relative flex w-[230px] flex-shrink-0 flex-col overflow-hidden rounded-[4px] bg-[#181818] text-left transition-transform duration-300 hover:z-10 hover:scale-[1.4] hover:shadow-[0_0_20px_rgba(0,0,0,0.7)] sm:w-[250px] lg:w-[280px]"
+                className="group relative flex w-[160px] flex-shrink-0 flex-col items-center gap-3 overflow-visible rounded-lg bg-[#181818] p-5 text-center transition-transform duration-300 hover:z-10 hover:scale-110 hover:bg-[#252525] hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] sm:w-[180px]"
               >
-                {/* Card top — brand logo */}
-                <div className="flex h-[140px] items-center justify-center bg-gradient-to-br from-[#333] to-[#1a1a1a]">
+                {/* Brand logo */}
+                <div className="flex h-16 w-16 items-center justify-center">
                   {Icon ? (
                     <Icon
-                      size={56}
+                      size={48}
                       className="transition-all duration-300 group-hover:scale-110"
                       style={{ color: brandColor ?? "rgba(255,255,255,0.4)" }}
                     />
                   ) : (
-                    <span className="text-lg font-bold text-white/20">{item.title}</span>
+                    <span className="text-2xl font-bold text-white/30">{item.title.charAt(0)}</span>
                   )}
                 </div>
 
-                {/* Card bottom info — hidden by default, shown on hover */}
-                <div className="flex flex-col gap-1.5 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold text-[#46d369]">{item.tag}</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-white">{item.title}</h3>
-                  <p className="line-clamp-2 text-xs leading-relaxed text-[#d2d2d2]">
-                    {item.description}
-                  </p>
-                </div>
+                {/* Name only */}
+                <h3 className="text-sm font-semibold text-white">{item.title}</h3>
+                <span className="text-[11px] text-[#808080]">{item.tag}</span>
               </motion.button>
             );
           })}
