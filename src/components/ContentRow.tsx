@@ -83,20 +83,22 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
             const Icon = iconMap[item.title];
             const brandColor = brandColorMap[item.title];
             return (
-              <motion.button
+              <motion.a
                 key={item.id}
+                href={item.link ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                onClick={() => onItemClick(item)}
-                className="group relative flex w-[160px] flex-shrink-0 flex-col items-center gap-3 overflow-visible rounded-lg bg-[#181818] p-5 text-center transition-transform duration-300 hover:z-10 hover:scale-110 hover:bg-[#252525] hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] sm:w-[180px]"
+                className="group relative flex w-[140px] flex-shrink-0 flex-col items-center gap-3 overflow-visible rounded-lg bg-[#181818] p-5 text-center transition-transform duration-300 hover:z-10 hover:scale-110 hover:bg-[#252525] hover:shadow-[0_8px_30px_rgba(0,0,0,0.6)] sm:w-[160px]"
               >
                 {/* Brand logo */}
-                <div className="flex h-16 w-16 items-center justify-center">
+                <div className="flex h-14 w-14 items-center justify-center">
                   {Icon ? (
                     <Icon
-                      size={48}
+                      size={44}
                       className="transition-all duration-300 group-hover:scale-110"
                       style={{ color: brandColor ?? "rgba(255,255,255,0.4)" }}
                     />
@@ -107,8 +109,7 @@ export default function ContentRow({ row, onItemClick }: ContentRowProps) {
 
                 {/* Name only */}
                 <h3 className="text-sm font-semibold text-white">{item.title}</h3>
-                <span className="text-[11px] text-[#808080]">{item.tag}</span>
-              </motion.button>
+              </motion.a>
             );
           })}
         </div>
