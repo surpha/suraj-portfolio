@@ -25,6 +25,15 @@ body {
   display: none;
 }
 
+/* Netflix curved arc text */
+.netflix-arc-text {
+  font-family: var(--font-bebas), "Bebas Neue", Impact, "Arial Black", sans-serif;
+  font-size: 110px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  filter: drop-shadow(0 0 30px rgba(229, 9, 20, 0.5)) drop-shadow(0 4px 12px rgba(229, 9, 20, 0.3));
+}
+
 /* Netflix profile avatar gradient backgrounds */
 .profile-avatar-0 { background: linear-gradient(135deg, #e50914 0%, #b20710 100%); }
 .profile-avatar-1 { background: linear-gradient(135deg, #0071eb 0%, #1a3a6b 100%); }

@@ -18,13 +18,6 @@ const profileIcons: Record<string, string> = {
 export default function DomainSelector({ domains, onSelect }: DomainSelectorProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#141414] px-4">
-      {/* Netflix-style top bar */}
-      <div className="absolute left-0 top-0 w-full px-8 py-6">
-        <span className="text-2xl font-extrabold tracking-tight text-[#e50914] sm:text-3xl">
-          SURAJFLIX
-        </span>
-      </div>
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -32,8 +25,11 @@ export default function DomainSelector({ domains, onSelect }: DomainSelectorProp
         className="flex flex-col items-center"
       >
         <h1 className="mb-2 text-4xl font-normal text-white sm:text-[3.5rem]">
-          Who&apos;s watching?
+          Suraj Phalod
         </h1>
+        <p className="text-base text-[#808080] sm:text-lg">
+          Select a profile to explore
+        </p>
 
         <div className="mt-12 flex flex-wrap items-start justify-center gap-6 sm:gap-8">
           {domains.map((domain, index) => (
